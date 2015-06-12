@@ -1,0 +1,28 @@
+<template name="leaderboard">
+	<div class="container">
+		<div class="row">
+			{{> mainNav}}
+		</div>
+		<h1>Leaderboard</h1>
+		<ul class="nav nav-tabs">
+		  <li class="leaderBoardTab {{btnActive1}}"><a href="#">Top Streaks</a></li>
+		  <li class="leaderBoardTab {{btnActive2}}"><a href="#">Most Correct Picks</a></li>
+		</ul>
+		<div id="topStreaks" class="{{topStreaksVisibility}}">
+				<h3>Top Current Steaks</h3>
+				<ol class="leaderboard">
+						{{#each topStreaks}}
+							<li><img src="http://www.gravatar.com/avatar/{{profile.hash}}?s=40" /> <a href="{{pathFor 'userProfile'}}">{{profile.username}}</a> ({{profile.streak}})</li>
+						{{/each}}
+					</ol>
+		</div>
+		<div id="topCorrectPicks" class="{{topCorrectPicksVisibility}}">
+			<h3>Most Correct Picks</h3>	
+			<ol class="leaderboard">
+				{{#each topCorrectPicks}}
+					<li><img src="http://www.gravatar.com/avatar/{{profile.hash}}?s=40" /> <a href="{{pathFor 'userProfile'}}">{{profile.username}}</a> ({{profile.correctPicks}})</li>
+				{{/each}}
+			</ol>		
+		</div>
+	</div>
+</template>

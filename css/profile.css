@@ -1,0 +1,38 @@
+/* PROFILE STYLES */
+
+/* sidbar*/
+#sidebar {
+  height: 100%;
+  padding-right: 0;
+  padding-top: 20px;
+  /*border:2px solid red;*/
+  float:left;
+  width:100%;
+}
+#sidebar .nav {
+  width: 95%;
+}
+#sidebar li {
+  border:0 #f2f2f2 solid;
+  border-bottom-width:1px;
+}
+
+
+
+
+#profile{
+	/*border:2px solid black;*/
+	width:100%;
+}
+
+#avatar{
+	padding-left:20px;
+	float:left;
+	/*border:2px solid red;*/
+	width:100%;
+	vertical-align: top;
+}
+
+.gameRow tr{
+  cursor:pointer;
+}

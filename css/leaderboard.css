@@ -1,0 +1,14 @@
+/* LEADERBOARD */
+
+/* leaderbord css */
+.leaderbord {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+.leaderboard li {
+  position: relative;
+  padding: 15px;
+  border-bottom: #eee solid 1px;
+}

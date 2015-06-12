@@ -1,0 +1,84 @@
+<template name="admin">
+ 	<div class="container">
+ 		  <div class="row">
+ 				{{> mainNav}}
+ 			</div>
+      {{#if currentUser.profile.admin}}
+      <h1>Admin Panel</h1>
+      <ul class="nav nav-tabs">
+        <li class="active adminTab"><a href="#">Insert game</a></li>
+        <li class="adminTab"><a href="#">Stats</a></li>
+        <li class="adminTab"><a href="#">All Games</a></li>
+      </ul>
+      <div class="{{insertGameVisibility}} row">
+        <h3>Insert a game</h3>
+        <form id="insertGame">
+            <div class="form-group">
+                <div class="form-group">
+                <label for="sel1">Select Game:</label>
+                <select class="form-control" name="game" id="game">
+                  <option>Halo</option>
+                  <option>Call of Duty</option>
+                </select>
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="inputTeam1">Team1</label>
+                <input type="text" class="form-control" name="team1" id="inputTeam1" placeholder="Team1">
+            </div>
+            <div class="form-group">
+                <label for="inputTeam2">Team2</label>
+                <input type="text" class="form-control" name="team2" id="inputTeam2" placeholder="Team2">
+            </div>
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" class="form-control" name="question" id="question">
+            </div>
+            <div class="input-group datetimepicker">
+        
+              <input class="set-due-date form-control" name="date" type="text" placeholder="Date"/>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <div class="{{statsVisibility}} row">
+        <h3>Summary Statistics</h3>
+        <table class="table table-striped">
+          <tbody>
+            <tr><td>Total Users:</td><td>{{totalUsers}}</td></tr>
+            <tr><td>Total picks</td><td>{{totalCurrentPicks}}</td></tr>
+            <tr><td>Games in Progress</td><td>{{gamesInProgress}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="{{allGamesVisibility}} row">
+        <h3>All Games</h3>
+        {{#each games}}
+          <div id="{{_id}}" class="game">
+            <div class="gameHeaderHalo">
+              {{game}} - {{question}}
+            </div>
+            <table class="table-striped gameInfo">
+              <tr><td width="5%"><input type="checkbox" class="teamCheckbox" data-toggle="modal" data-target="{{#if currentUser}}#loggedInModal{{else}}#loggedOutModal{{/if}}" value="1"></td><td width="50%">{{team1}}</td><td></td></tr>
+              <tr><td><input type="checkbox" class="teamCheckbox" data-toggle="modal" data-target="{{#if currentUser}}#loggedInModal{{else}}#loggedOutModal{{/if}}" value="2"></td><td>{{team2}}</td><td></td></tr>
+            </table>
+            <div class="moreInfo">
+              Start Time: {{date}}
+            </div>
+        </div>
+        {{/each}}
+        {{#if more}}
+        <div class="row" style="text-align:center;">
+          <button type="button" class="btn btn-lg showMore">Show More</button>
+        </div>
+        {{/if}}
+      </div>
+      {{else}}
+ 			You do not have access to this page
+      {{/if}}
+    </div>
+</template>

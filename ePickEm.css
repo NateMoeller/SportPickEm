@@ -1,0 +1,114 @@
+/* CSS declarations go here */
+.visible {
+  display: block !important;
+  visibility: visible !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+
+/* game styles */
+
+.game{
+  margin-bottom: 10px;
+}
+
+.gameInfo{
+  width:100%;
+}
+.gameInfo tr{
+  border-bottom: 1px solid #f2f2f2;
+}
+#bottom{
+	margin-top:50px;
+}
+
+/*headers for the game class */
+.gameHeaderHalo{
+	font-weight: bold;
+	font-size: 14px;
+	background-color:#000489; /* dark blue*/
+	color:#FFFFFF; /* white */
+}
+.gameHeaderCoD{
+	font-weight: bold;
+	font-size: 14px;
+	background-color:#FFFF99; 
+	color:#331A00C;
+}
+.headerLink{
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.headerLink:hover{
+  color: #FFFFFF;
+}
+
+
+/*checkbox to select a team */
+.teamCheckbox{
+	 display: inline-block;  
+    width: 15px;  
+    height: 15px;  
+    vertical-align:middle;
+    margin-right: 8px;  
+    background-color: #484848 ;  
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    border-radius: 4px;  
+}
+
+/* delete a pick */
+.delete {
+  float: right;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
+  position: relative;
+}
+
+
+
+/*Error for forms */
+label.error { 
+  color:red; 
+}
+
+/*COMMENT styles */
+#addComment{
+  margin-top:100px;
+  margin-bottom:10px;
+}
+
+.commentBoard{
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+.commentBoard li{
+  list-style-type: none;
+  position: relative;
+  padding: 15px;
+  border-bottom: #eee solid 1px;
+}
+.commentImg{
+  float:left;
+  margin-right: 10px;
+}
+.commentName{
+
+}
+.muted{
+  color: #888;
+}
+
+
+
+
+
+
+
+
+

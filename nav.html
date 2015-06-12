@@ -1,0 +1,45 @@
+<template name="mainNav">
+  <nav role="navigation" class="navbar navbar-default">
+  	<div class="navbar-header">
+  	  <a class="navbar-brand" href="/">ePickEm</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" 
+           data-target="#navbarCollapse">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+        </button>
+     </div>
+      <!-- Collection of nav links and other content for toggling -->
+      <div id="navbarCollapse" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav mainNav">     
+              <li class="tab"><a href="/about">About</a></li>
+              <li class="tab"><a href="/leaderboard">Leaderboards</a></li>
+              {{#if currentUser}}
+              	<li class="tab"><a href="/profile">Profile</a></li>
+              	<li class="tab"><a href="/allGames">All Games</a></li>
+              {{/if}}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              {{#if currentUser}}
+                <li class="tab"><a href="#" id="logout">Logout</a></li>
+              {{else}}
+                <li class="tab"><a href="/login">Login</a></li>
+                <li class="tab"><a href="/register">Register</a></li>
+              {{/if}}
+              
+          </ul>
+      </div>
+  </nav>
+</template>
+
+<template name="sideNav">
+	<div class="col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav">
+              <li class="active sideTab"><a href="#">Profile</a></li>
+              <li class="sideTab"><a href="#">Pick History</a></li>
+              <li class="sideTab"><a href="#">Current Picks</a></li>      
+              <li class="sideTab"><a href="#">Settings</a></li> 
+            </ul>
+        </div>
+</template>

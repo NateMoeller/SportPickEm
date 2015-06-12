@@ -1,0 +1,65 @@
+<template name="userProfile">
+	<div class="container">
+		<div class="row">
+			{{> mainNav}}
+		</div>
+		<h1>User Profile {{profile.username}}</h1>
+		<div class="row">
+			<div class="row">
+				<div class="col-md-3">
+					<div id="avatar" class="row">
+						<img style="float:left;" src="http://www.gravatar.com/avatar/{{profile.hash}}" />
+					</div>
+					<div class="row">
+						{{> userProfileNav}}
+					</div>
+				</div>
+				<div class="col-md-9">
+					<div class="{{statsVisibility}} row">
+						{{> userProfileStats}}
+					</div>
+					<div class="{{historyVisibility}} row">
+						{{> userProfileHistory}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="userProfileNav">
+	<div class="col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+            <li class="active sideTab"><a href="#">Profile</a></li>
+            <li class="sideTab"><a href="#">Pick History</a></li>
+        </ul>
+    </div>
+</template>
+
+<template name="userProfileStats">
+	<h3>{{profile.username}}'s stats</h3><br/>
+	<table class="table table-striped">
+ 		<tbody>
+ 			<tr><td>Current Run: </td><td>{{profile.streak}}</td></tr>
+ 			<tr><td>Correct Picks: </td><td>{{profile.correctPicks}}</td></tr>
+ 			<tr><td>Incorrect Picks: </td><td>{{profile.incorrectPicks}}</td></tr>
+ 			<tr><td>Longest Run: </td><td>{{profile.longestStreak}}</td></tr>
+ 		</tbody>
+ 	</table>
+</template>
+
+<template name="userProfileHistory">
+	<h3>Pick History</h3>
+	<table class="table table-striped">
+ 		<thead>
+ 			<th>Date</th><th>Status</th><th>Team 1</th><th>Team 2</th><th>Pick</th><th>Result</th>
+ 		</thead>
+ 		<tbody class="gameRow">
+ 			{{#each history}}
+ 				<tr class="{{#if correct}}success{{else}}danger{{/if}}">
+ 					<td>{{date}}</td><td>{{status}}</td><td>{{team1}}</td><td>{{team2}}</td><td>{{pickedTeam}}</td><td>{{result}}</td>
+ 				</tr>
+ 			{{/each}}
+ 		</tbody>
+ 	</table>
+</template>
