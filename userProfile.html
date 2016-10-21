@@ -1,14 +1,13 @@
 <template name="userProfile">
+	{{> mainNav}}
 	<div class="container">
-		<div class="row">
-			{{> mainNav}}
-		</div>
-		<h1>User Profile {{profile.username}}</h1>
+		<h1>User Profile</h1>
 		<div class="row">
 			<div class="row">
 				<div class="col-md-3">
 					<div id="avatar" class="row">
-						<img style="float:left;" src="http://www.gravatar.com/avatar/{{profile.hash}}" />
+						<img class="img-circle" style="float:left; margin-right:5px;" src="{{profile.hash}}{{imgSize}}" />
+						{{profile.username}}
 					</div>
 					<div class="row">
 						{{> userProfileNav}}
@@ -37,15 +36,22 @@
 </template>
 
 <template name="userProfileStats">
-	<h3>{{profile.username}}'s stats</h3><br/>
-	<table class="table table-striped">
- 		<tbody>
- 			<tr><td>Current Run: </td><td>{{profile.streak}}</td></tr>
- 			<tr><td>Correct Picks: </td><td>{{profile.correctPicks}}</td></tr>
- 			<tr><td>Incorrect Picks: </td><td>{{profile.incorrectPicks}}</td></tr>
- 			<tr><td>Longest Run: </td><td>{{profile.longestStreak}}</td></tr>
- 		</tbody>
- 	</table>
+	<div>
+		<div class="col-md-4" style="text-align:center;">
+			<h2>Current Run:</h2>
+			<h2 class="number" style="display:none;">{{profile.streak}}</h2>
+		</div>
+		<div class="col-md-8">
+			<br/>
+			<table class="table table-striped">
+ 				<tbody>
+ 					<tr><td>Correct Picks: </td><td class="green">{{profile.correctPicks}}</td></tr>
+ 					<tr><td>Incorrect Picks: </td><td class="red">{{profile.incorrectPicks}}</td></tr>
+ 					<tr><td>Longest Run: </td><td class="green">{{profile.longestStreak}}</td></tr>
+ 				</tbody>
+ 			</table>
+		</div>
+	</div>
 </template>
 
 <template name="userProfileHistory">

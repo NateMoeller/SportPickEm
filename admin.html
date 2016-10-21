@@ -1,8 +1,6 @@
 <template name="admin">
+  {{> mainNav}}
  	<div class="container">
- 		  <div class="row">
- 				{{> mainNav}}
- 			</div>
       {{#if currentUser.profile.admin}}
       <h1>Admin Panel</h1>
       <ul class="nav nav-tabs">
@@ -19,16 +17,25 @@
                 <select class="form-control" name="game" id="game">
                   <option>Halo</option>
                   <option>Call of Duty</option>
+                  <option>football</option>
                 </select>
             </div>
             </div>
             <div class="form-group">
-                <label for="inputTeam1">Team1</label>
-                <input type="text" class="form-control" name="team1" id="inputTeam1" placeholder="Team1">
+                <label for="team1">Team1</label>
+                <select class="form-control" name="team1" id="team1">
+                  {{#each teams}}
+                    <option>{{name}}</option>
+                  {{/each}}
+                </select>
             </div>
             <div class="form-group">
-                <label for="inputTeam2">Team2</label>
-                <input type="text" class="form-control" name="team2" id="inputTeam2" placeholder="Team2">
+                <label for="team2">Team2</label>
+                <select class="form-control" name="team2" id="team2">
+                  {{#each teams}}
+                    <option>{{name}}</option>
+                  {{/each}}
+                </select>
             </div>
             <div class="form-group">
                 <label for="question">Question:</label>

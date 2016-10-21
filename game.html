@@ -1,28 +1,27 @@
 <template name="game">
+	{{> mainNav}}
 	<div class="container">
-		<div class="row">
-			{{> mainNav}}
-		</div>
-		<h1>{{team1}} vs {{team2}}</h1>
-		{{formattedDate}}<br/>
-		{{status}}
-		<h2>{{question}}</h2>
+		<h1>{{question}}</h1>
 		<div class="row">
 			<div class="col-md-4">
-				{{team1}}
+				<div class="center row">
+					<img src="{{team1Img}}" width="300" height="200px"/>
+				</div>
+				<div class="center row">
+					<h2>{{team1}} - {{team1Percentage}}</h2>
+				</div>
 			</div>
-			<div class="col-md-8">
-				{{team1Percentage}}
+			<div class="center col-md-4">
+				<h2>VS</h2>
 			</div>
 			<div class="col-md-4">
-				{{team2}}
+				<div class="center row">
+					<img src="{{team2Img}}" width="300" height="200px"/>
+				</div>
+				<div class="center row">
+					<h2>{{team2}} - {{team2Percentage}}</h2>
+				</div>
 			</div>
-			<div class="col-md-8">
-				{{team2Percentage}}
-			</div>
-		</div>
-		<div style="margin-top:50px">
-			Result: {{gameResult}}
 		</div>
 		{{#if currentUser}}
 		<form id="addComment">
@@ -35,7 +34,7 @@
 					<li>
 						<div class="row">
 							<div class="commentImg">
-								<img src="http://www.gravatar.com/avatar/{{user.profile.hash}}?s=40" />
+								<img src="{{user.profile.hash}}?s=40" width="40px" height="40px"/>
 							</div>
 							<div class="commentName">
 								<a href="/user/{{user._id}}">{{user.profile.username}}</a> <span class="muted">{{date}}</span>

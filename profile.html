@@ -1,17 +1,14 @@
 <template name="profile">
+	{{> mainNav}}
 	<div class="container">
-		<div class="row">
-			{{> mainNav}}
-		</div>
-		<h1>My Profile</h1>
+		<h1>My Profile</h1><br/>
 		<div class="row">
 			<div class="row">
 				<div class="col-md-3">
 					<div id="avatar" class="row">
-						<img style="float:left; margin-right:5px;" src="http://www.gravatar.com/avatar/{{imgHash}}" />
+						<img class="img-circle" style="float:left; margin-right:5px;" width="80px" height="80px" src="{{imgHash}}{{imgSize}}" />
 						{{username}}<br/>
-						{{email}}<br/>
-						<a href="https://en.gravatar.com/gravatars/new/" target="_blank">Change Gravatar</a>
+						{{#if facebook}}{{else}}{{email}}<br/><a href="https://en.gravatar.com/gravatars/new/" target="_blank">Change Gravatar</a>{{/if}}
 					</div>
 					<div class="row">
 						{{> sideNav}}
@@ -20,9 +17,12 @@
 				<div class="col-md-9">
 					<div id="stats" class="{{statsVisibility}} row">
 						{{> stats}}
-						<div id="graph">
+						<div id="graph" class="center">
 							{{> highchartsHelper chartId="test" chartObject=chart width="100%"}}
 						</div>
+					</div>
+					<div id="bitcoin" class="{{bitcoinVisibility}} row">
+						{{> bitcoin}}
 					</div>
 					<div id="history" class="{{historyVisibility}} row">
 						{{> pickHistory}}
@@ -41,15 +41,22 @@
 
 
 <template name="stats">
-	<h3>{{username}}'s stats</h3><br/>
-	<table class="table table-striped">
- 		<tbody>
- 			<tr><td>Current Run: </td><td>{{streak}}</td></tr>
- 			<tr><td>Correct Picks: </td><td>{{correctPicks}}</td></tr>
- 			<tr><td>Incorrect Picks: </td><td>{{incorrectPicks}}</td></tr>
- 			<tr><td>Longest Run: </td><td>{{longestStreak}}</td></tr>
- 		</tbody>
- 	</table>
+	<div>
+		<div class="col-md-4" style="text-align:center;">
+			<h2>Current Run:</h2>
+			<h2 class="number" style="display:none;">{{streak}}</h2>
+		</div>
+		<div class="col-md-8">
+			<br/>
+			<table class="table table-striped">
+ 				<tbody>
+ 					<tr><td>Correct Picks: </td><td class="green">{{correctPicks}}</td></tr>
+ 					<tr><td>Incorrect Picks: </td><td class="red">{{incorrectPicks}}</td></tr>
+ 					<tr><td>Longest Run: </td><td class="green">{{longestStreak}}</td></tr>
+ 				</tbody>
+ 			</table>
+		</div>
+	</div>
 </template>
 
 <template name="currentPicks">
@@ -66,6 +73,12 @@
  			{{/each}}
  		</tbody>
  	</table>
+</template>
+
+<template name="bitcoin">
+	<h3>Bitcoin</h3>
+	Balance: {{balance}}<br/>
+	Public Address: {{address}}
 </template>
 
 <template name="pickHistory">

@@ -71,6 +71,18 @@ if(Meteor.isClient){
 				return String((count / picks.length * 100) + '%');
 			}
 		},
+		team1Img:function(){
+			var team1 = this.team1;
+			//find the team
+			var team = Teams.findOne({"name": team1});
+			return team.pic;
+		},
+		team2Img:function(){
+			var team2 = this.team2;
+			//find the team
+			var team = Teams.findOne({"name": team2});
+			return team.pic;
+		},
 		gameResult:function(){
 			var result = this.result;
 			if(parseInt(result) == 1){

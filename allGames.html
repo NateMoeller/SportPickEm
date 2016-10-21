@@ -1,29 +1,62 @@
 <template name="allGames">
+	{{> mainNav}}
  	<div class="container">
- 		<div class="row">
- 			{{> mainNav}}
- 		</div>
- 		<h1>All Games</h1>
- 		<h3>Halo - {{currentDate}}</h3>
- 		{{#each games}}
-			<div id="{{_id}}" class="game">
-				<div class="gameHeaderHalo">
-					<a href="{{pathFor 'game'}}" class="headerLink">{{game}} - {{question}}</a>
-				</div>
-				<table class="table-striped gameInfo">
-					<tr><td width="5%"><input type="checkbox" checked="{{checked1}}" disabled="{{disabled}}" class="teamCheckbox" data-toggle="modal" data-target="#loggedInModal" value="1"></td><td width="50%">{{team1}}</td><td></td></tr>
-					<tr><td><input type="checkbox" checked="{{checked2}}" disabled="{{disabled}}" class="teamCheckbox" data-toggle="modal" data-target="#loggedInModal" value="2"></td><td>{{team2}}</td><td></td></tr>
-				</table>
-				<div class="moreInfo">
-					Start Time: {{formattedDate}}
-				</div>
-			</div>
-		{{/each}}
-		{{#if more}}
-		<div class="row" style="text-align:center;">
-			<button type="button" class="btn btn-lg showMore">Show More</button>
-		</div>
-		{{/if}}
+ 		<h1>All Games</h1><br/>
+ 		<div class="panel-group" id="accordion">
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">NFL Football</a>
+	                </h4>
+	            </div>
+	            <div id="collapseOne" class="panel-collapse collapse in">
+	                <div class="panel-body">
+	                	{{#each games}}
+							<div id="{{_id}}" class="row game">
+								<div class="gameHeaderHalo">
+									<a href="{{pathFor 'game'}}" class="headerLink">{{question}}</a>
+								</div>
+								<div>
+									<div class="pictureDiv col-md-1">
+										<a href="{{pathFor 'game'}}"><img src="nfl.png" width="60px" height="60px"><!--<img src="mcc.jpg" width="60px" heigh="80px"/>--></a>
+									</div>
+									<div class="dateDiv col-md-2">
+										{{formattedDate}}<br/><br/>
+										<a href="{{pathFor 'game'}}">View Game</a>
+									</div>	
+									<div class="tableDiv col-md-9">
+										<table class="table-striped gameInfo">
+											<tr><td width="5%"><label><input type="checkbox" checked="{{checked1}}" disabled="{{disabled}}" class="teamCheckbox" data-toggle="modal" data-target="#loggedInModal" data-backdrop="static" value="1"></label></td><td width="50%">{{team1}}</td><td></td></tr>
+											<tr><td><input type="checkbox" checked="{{checked2}}" disabled="{{disabled}}" class="teamCheckbox" data-toggle="modal" data-target="#loggedInModal" data-backdrop="static" value="2"></td><td>{{team2}}</td><td></td></tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						{{/each}}
+						
+						{{#if more}}
+						<div class="row" style="text-align:center;">
+							<button type="button" class="btn btn-lg showMore">Show More</button>
+						</div>
+						{{/if}}
+	                </div>
+	            </div>
+	        </div>
+	        <div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h4 class="panel-title">
+	                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">NCAA Football</a>
+	                </h4>
+	            </div>
+	            <div id="collapseTwo" class="panel-collapse collapse">
+	                <div class="panel-body">
+	                	CONTENT
+	                </div>
+	            </div>
+	        </div>
+    	</div>
+ 		
+
 		<!-- Our Logged in popup box -->
  		<div id="loggedInModal" class="modal fade" role="dialog">
 		  <div class="modal-dialog">

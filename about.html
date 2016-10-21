@@ -1,28 +1,44 @@
 <template name="about">
+    {{> mainNav}}
  	<div class="container">
- 		<div class="row">
- 			{{> mainNav}}
- 		</div>
  		<h1>About</h1><br/>
- 		<div id="accordion">
- 		  <h3>What is ePickEm?!</h3>	
-          <div>
-            <p>
-            	Explain... 
-            </p>
-          </div>
-          <h3>How does this work?</h3>
-          <div>
-          	<p>
-          		Explain...
-          	</p>
-          </div>
-          <h3>What games are currently offered?</h3>
-          <div>
-          	<p>
-          		Only halo is offered at this time.
-          	</p>
-          </div>
+     <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. What is SportsRunnin?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>sportsRunnin is a free to play website game for users to pick outcomes of their favorite sports, and win prizes!</p>
+                </div>
+            </div>
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. How does this work?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Explain how this works..</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. What games are supported?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>Only NFL</p>
+                </div>
+            </div>
+        </div>
+    </div> 
  	</div>
 </template>

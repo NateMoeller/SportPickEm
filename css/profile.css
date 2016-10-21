@@ -20,6 +20,7 @@
 
 
 
+
 #profile{
 	/*border:2px solid black;*/
 	width:100%;
@@ -35,4 +36,25 @@
 
 .gameRow tr{
   cursor:pointer;
+}
+
+.number{
+  font-size: 72px;
+  background: #1e5799; /* Old browsers */
+  background: -moz-linear-gradient(top,  #1e5799 41%, #7db9e8 93%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(41%,#1e5799), color-stop(93%,#7db9e8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* IE10+ */
+  background: linear-gradient(to bottom,  #1e5799 41%,#7db9e8 93%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.green{
+  color:#007A00;
+}
+.red{
+  color:#CC3300;
 }

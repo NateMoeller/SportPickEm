@@ -1,8 +1,6 @@
 <template name="home">
+    {{> mainNav}}
  	<div class="container">
- 		<div class="row">
- 			{{> mainNav}}
- 		</div>
  		<div id="carouselDiv" class="row">
  			{{> carousel}}
  		</div>
@@ -42,12 +40,20 @@
   <div id="carousel">
     <div id="box1" class="hero-unit story">
     	<h2><img src="logo.png" style="margin:0 auto;"/></h2>
+        <a class="btn btn-lg btn-primary" href="#" role="button">Sign up!</a>
    	</div>
     <div id="box2" class="story">
-    	<h2>CONTENT 2</h2>
+        <div>
+    	    <h2 class="big">Welcome to,</h2> 
+            <h2 class="big">INSERT NAME HERE.</h2>
+            <p class="caption">Predict the outcome, win prizes.</p><br/><br/>
+            <a class="btn btn-lg btn-primary" href="#" role="button">Find out more</a>
+        </div>
     </div>
+    <!--
     <div id="box3" class="story">
     	<h2>CONTENT 3</h2>
     </div>
+    -->
   </div>
 </template>

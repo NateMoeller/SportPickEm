@@ -85,6 +85,7 @@ Router.map( function () {
 Games = new Mongo.Collection("games");
 Current_Picks = new Mongo.Collection("currentPicks");
 Comments = new Mongo.Collection('comments');
+Teams = new Mongo.Collection('teams');
 
 if (Meteor.isClient) {
   
@@ -97,6 +98,7 @@ if (Meteor.isClient) {
   Meteor.subscribe("totalInProgressGames");
 	Meteor.subscribe("allUsers");
   Meteor.subscribe("comments");
+  Meteor.subscribe("teams");
   Meteor.subscribe("finishedGames");
   Meteor.subscribe("inProgressGames");
 

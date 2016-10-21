@@ -1,14 +1,12 @@
 <template name="login">
+	{{> mainNav}}
 	<div class="container">
-		<div class="row">
-			{{> mainNav}}
-		</div>
 		{{#if currentUser}}
 			<p>You are already logged in.</p>
 		{{else}}
 			<div class="row">
 				<div style="width: 50%; margin: 0 auto;">
-					<h3>Login</h3>
+					<h1>Login</h1>
 					<form id="login">
 						<div class="form-group">
 						   	<label for="email">Email</label>
@@ -21,6 +19,8 @@
 					    <button type="submit" class="btn btn-primary">Submit</button>
 					</form>
 					<p id="loginError" style="margin-top:10px; color:red;"></p>
+					<br/>
+				    <button id="facebook-login" class="btn-facebook"> Login with Facebook</button>
 				</div>
 			</div>
 		{{/if}}

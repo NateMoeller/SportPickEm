@@ -18,7 +18,13 @@ if(Meteor.isClient){
   			else{
     			return "hidden";
   			}
-		}
+		},
+		imgSize:function(){
+			//first check if facebook user (ONLY facebook users have names)
+			if(typeof(Meteor.users.findOne({"_id": this._id}).profile.name) != "undefined"){
+				return "?type=normal";	
+			}
+		},
 	});
 
 	Template.userProfile.events({
@@ -31,6 +37,10 @@ if(Meteor.isClient){
 				Session.set("userProfilePanel", 2);
 			}
 		}
+	});
+
+	Template.userProfileStats.onRendered(function(){
+		$(".number").fadeIn(1000);
 	});
 
 	Template.userProfileHistory.helpers({

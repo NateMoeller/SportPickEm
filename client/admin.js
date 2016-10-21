@@ -1,6 +1,7 @@
 if(Meteor.isClient){
 	var PAGE_SIZE = 5;
 	Session.setDefault('adminPanel', 1);
+	Session.setDefault('selectedGame', "Halo");
 
 	Template.admin.events({
 		"submit #insertGame":function(event){
@@ -15,6 +16,8 @@ if(Meteor.isClient){
 
 			event.target.team1.value = '';
 			event.target.team2.value = '';
+			event.target.date.value = '';
+			event.target.question.value = '';
 
 			console.log("inserted Game");
 
@@ -47,6 +50,10 @@ if(Meteor.isClient){
 			$(".adminTab").removeClass("active");
 
 			$(event.target.parentNode).addClass("active");
+      	},
+      	"change #game":function(event){
+      		//console.log(event.target.value);
+      		Session.set('selectedGame', event.target.value);
       	}
 
 	});
@@ -54,6 +61,10 @@ if(Meteor.isClient){
 	Template.admin.helpers({
 		games:function(){
 			return Games.find({"status": {$ne: "Finished"}});
+		},
+		teams:function(){
+			var game = Session.get('selectedGame');
+			return Teams.find({"sport": game});
 		},
 		totalUsers:function(){
 			return Counts.get('users');

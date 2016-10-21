@@ -1,8 +1,31 @@
 if(Meteor.isClient){
 	
 
+	Session.set('myBalance', 'loading...');
+	Session.set('myAddress', 'loading...');
 	// this variable controls which tab is displayed and associated application state
 	Session.setDefault('selectedPanel', 1);
+
+	//BITCOIN get the balance
+	Meteor.call("getBalance", function(error, result){
+		if(error){
+			console.log("error");
+			console.log(error.reason);
+		}
+		else{
+			Session.set('myBalance', result.data.available_balance);
+		}
+  	});
+  	//get user address
+	  Meteor.call("getAddress", function(error, result){
+		if(error){
+			console.log(error.reason);
+		}
+		else{
+			//set address
+			Session.set('myAddress', result.data.address);
+		}
+	  });
 
 	Template.profile.helpers({
 
@@ -14,6 +37,14 @@ if(Meteor.isClient){
   			else{
     			return "hidden";
   			}
+		},
+		bitcoinVisibility:function(){
+			if(Session.get('selectedPanel') == 5){
+				return "visible";
+			}
+			else{
+				return "hidden";
+			}
 		},
 		historyVisibility:function(){
 			if(Session.get('selectedPanel') == 2){
@@ -39,11 +70,26 @@ if(Meteor.isClient){
     			return "hidden";
   			}
 		},
-
+		imgSize:function(){
+			//first check if facebook user (ONLY facebook users have names)
+			if(typeof(Meteor.user().profile.name) != "undefined"){
+				return "?type=normal";	
+			}
+		},
 		imgHash:function(){
+			// TODO: this is throwing an error
 			return Meteor.user().profile.hash;
 		},
+		facebook:function(){
+			if(typeof(Meteor.user().profile.name) != "undefined"){
+				return true;
+			}
+			else{
+				return false;
+			}
+		},
 		email:function(){
+			// TODO: this is throwing an error
 			var user = Meteor.user();
 			return user.emails[0].address;
 		},
@@ -77,15 +123,14 @@ if(Meteor.isClient){
 			});
 			data.sort(); //sort the data based on timestamp
 			//change the date of the initial data point
-			if(data.length > 1){
-				data[0][0] = data[1][0] - 86400000; //milliseconds in 1 day
-			}
-			else{
-				data[0][0] = new Date().getTime();
-			}
+			data[0][0] = Meteor.user().createdAt.getTime(); // TODO: this is throwing an error
 			
 			return {
-			    	title: {
+				chart: {
+            		type: 'line',
+            		width: 950
+        		},
+			    title: {
 		        	text: 'Current Run',
 		            x: -20 //center
 		        },
@@ -138,6 +183,9 @@ if(Meteor.isClient){
 			else if(name == "settings"){
 				Session.set("selectedPanel", 4);
 			}
+			else if(name == "bitcoin"){
+				Session.set("selectedPanel", 5);
+			}
 		}
 	});
 
@@ -161,6 +209,15 @@ if(Meteor.isClient){
 		},
 		longestStreak:function(){
 			return Meteor.user().profile.longestStreak;
+		}
+	});
+
+	Template.bitcoin.helpers({
+		balance:function(){
+			return Session.get('myBalance');
+		},
+		address:function(){
+			return Session.get('myAddress');
 		}
 	});
 
@@ -261,6 +318,9 @@ if(Meteor.isClient){
 		}
 	});
 
+	Template.stats.onRendered(function(){
+		$(".number").fadeIn(1000);
+	});	
 
 	Template.settings.onRendered(function(){
         $("#changePassword").validate({

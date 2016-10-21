@@ -1,14 +1,12 @@
 <template name="register">
+	{{> mainNav}}
 	<div class="container">
-		<div class="row">
-			{{> mainNav}}
-		</div>
 		{{#if currentUser}}
 			You are already logged in.
 		{{else}}
 		<div class="row">
 			<div style="width: 50%; margin: 0 auto;">
-				<h3>Register</h3>
+				<h1>Register</h1>
 				<form id="register">
 					<div class="form-group">
 				   		<label for="username">Username</label>
@@ -25,6 +23,8 @@
 			    	<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 				<p id="registerMessage" style="color:red;"></p>
+				<br/>
+				<button id="facebook-login" class="btn-facebook"> Login with Facebook</button>
 			</div>
 		</div>
 		{{/if}}	

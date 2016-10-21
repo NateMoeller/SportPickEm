@@ -8,10 +8,12 @@ if(Meteor.isClient){
   var allGames = [];
 
   Session.set("gamePicked", false);
+  
   Session.setDefault('gamesLimit', PAGE_SIZE);
   Deps.autorun(function() {
     Meteor.subscribe('upcomingGames', Session.get('gamesLimit'));
   });
+  
 
 	Template.allGames.helpers({
     currentDate:function(){
@@ -21,7 +23,7 @@ if(Meteor.isClient){
       return !Session.get("gamePicked");
     },
 		games:function(){
-			var games = Games.find({"status": "Upcoming"}).fetch();
+			var games = Games.find({"status": "Upcoming"}, {"sort": {"date": 1}}).fetch();
       return games;
 		},
 		clickedTeam:function(){
@@ -57,6 +59,7 @@ if(Meteor.isClient){
         return false;
       }
     },
+    
     more:function(){
       if(Counts.get('upcomingGames') > Session.get("gamesLimit")){
         return true;
@@ -65,6 +68,7 @@ if(Meteor.isClient){
         return false;
       }
     }
+    
 	});
 
 
@@ -101,11 +105,18 @@ if(Meteor.isClient){
       "click .no":function(event){
         $(clickedCheckbox).removeAttr('checked');
       },
+      "click .close":function(event){
+        $(clickedCheckbox).removeAttr('checked');
+      },
       "click .closeBtn":function(event){
         $(".teamCheckbox").removeAttr('checked');
       },
       "click .showMore":function(event){
         Session.set('gamesLimit', Session.get('gamesLimit') + PAGE_SIZE);
+      },
+      "shown.bs.modal #loggedInModal": function(e){
+
       }
 	});
+
 }

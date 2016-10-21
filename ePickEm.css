@@ -13,6 +13,7 @@
 
 .game{
   margin-bottom: 10px;
+  border: 1px solid #f2f2f2;
 }
 
 .gameInfo{
@@ -28,9 +29,19 @@
 /*headers for the game class */
 .gameHeaderHalo{
 	font-weight: bold;
+  height:25px;
 	font-size: 14px;
-	background-color:#000489; /* dark blue*/
 	color:#FFFFFF; /* white */
+  margin-bottom:5px;
+
+  background: #1e5799; /* Old browsers */
+  background: -moz-linear-gradient(top,  #1e5799 41%, #7db9e8 93%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(41%,#1e5799), color-stop(93%,#7db9e8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* IE10+ */
+  background: linear-gradient(to bottom,  #1e5799 41%,#7db9e8 93%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
 }
 .gameHeaderCoD{
 	font-weight: bold;
@@ -50,8 +61,8 @@
 /*checkbox to select a team */
 .teamCheckbox{
 	 display: inline-block;  
-    width: 15px;  
-    height: 15px;  
+    width: 30px;  
+    height: 30px;  
     vertical-align:middle;
     margin-right: 8px;  
     background-color: #484848 ;  
@@ -78,7 +89,7 @@ label.error {
 
 /*COMMENT styles */
 #addComment{
-  margin-top:100px;
+  margin-top:50px;
   margin-bottom:10px;
 }
 
@@ -104,11 +115,44 @@ label.error {
   color: #888;
 }
 
+#carouselDiv{
+  margin-bottom: 20px;
+}
+
+.story{
+  text-align: center;
+}
+
+h1{
+  font-family: 'Orbitron', sans-serif;
+}
+.big{
+  font-size: 72px;
+  font-family: 'Orbitron', sans-serif;
+}
+.caption{
+  font-size:20px;
+  font-style: italic;
+}
+.tab a{
+  font-family: 'Orbitron', sans-serif;
+}
 
 
 
-
-
+/* ABOUT STYLES*/
+.panel-default .panel-heading{
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #1e5799; /* Old browsers */
+  background: -moz-linear-gradient(top,  #1e5799 41%, #7db9e8 93%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(41%,#1e5799), color-stop(93%,#7db9e8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #1e5799 41%,#7db9e8 93%); /* IE10+ */
+  background: linear-gradient(to bottom,  #1e5799 41%,#7db9e8 93%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+}
 
 
 

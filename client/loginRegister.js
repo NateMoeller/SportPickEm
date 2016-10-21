@@ -6,8 +6,8 @@ if (Meteor.isClient) {
         	var password = event.target.registerPassword.value;
         	var username = event.target.registerUsername.value;
 
-            var user = Meteor.users.find({"profile.username": {$regex : new RegExp(username, "i") }}).fetch();
-            
+            //check to see if there is already a user with this email or username
+            var user = Meteor.users.find({$or: [{"profile.username": {$regex : new RegExp(username, "i") }}, {"emails": {$elemMatch: {"address": email}}}]}).fetch();
             if(user.length == 0){
                 
                 Accounts.createUser({
@@ -20,7 +20,7 @@ if (Meteor.isClient) {
                         "correctPicks": 0, 
                         "incorrectPicks": 0, 
                         "longestStreak": 0, 
-                        "hash": CryptoJS.MD5(email.toLowerCase()).toString(),
+                        "hash": "http://www.gravatar.com/avatar/" + CryptoJS.MD5(email.toLowerCase()).toString(),
                     } 
                 });
 
@@ -31,10 +31,18 @@ if (Meteor.isClient) {
             }
             else{
                 //show error message
-                $("#registerMessage").html("This username is already taken. Please choose another.");
+                $("#registerMessage").html("The username or email is already taken. Please choose another.");
             }
-        	
-            
+        },
+        'click #facebook-login':function(){
+            Meteor.loginWithFacebook({}, function(err){
+                if (err) {
+                    throw new Meteor.Error("Facebook login failed");
+                }
+                else{
+                    Router.go('profile');
+                }
+            });
         }
     });
 
@@ -87,10 +95,18 @@ if (Meteor.isClient) {
                     // if we are on the login route, we want to redirect the user
                     return Router.go('profile');
                 }
+            });  
+    	},
+        'click #facebook-login': function(event) {
+            Meteor.loginWithFacebook({}, function(err){
+                if (err) {
+                    throw new Meteor.Error("Facebook login failed");
+                }
+                else{
+                    //do something here
+                    return Router.go("profile");
+                }
             });
-
-
-            
-    	}
+        },
     });
 }
