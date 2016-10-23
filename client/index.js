@@ -31,7 +31,7 @@ Router.map( function () {
   this.route('home', {
     path: '/',
     onAfterAction: function () {
-      document.title = "ePickEm";
+      document.title = "SportsRunnin";
     }
   });
   this.route('profile', {

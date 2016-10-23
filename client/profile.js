@@ -1,31 +1,7 @@
 if(Meteor.isClient){
 	
-
-	Session.set('myBalance', 'loading...');
-	Session.set('myAddress', 'loading...');
 	// this variable controls which tab is displayed and associated application state
 	Session.setDefault('selectedPanel', 1);
-
-	//BITCOIN get the balance
-	Meteor.call("getBalance", function(error, result){
-		if(error){
-			console.log("error");
-			console.log(error.reason);
-		}
-		else{
-			Session.set('myBalance', result.data.available_balance);
-		}
-  	});
-  	//get user address
-	  Meteor.call("getAddress", function(error, result){
-		if(error){
-			console.log(error.reason);
-		}
-		else{
-			//set address
-			Session.set('myAddress', result.data.address);
-		}
-	  });
 
 	Template.profile.helpers({
 
@@ -37,14 +13,6 @@ if(Meteor.isClient){
   			else{
     			return "hidden";
   			}
-		},
-		bitcoinVisibility:function(){
-			if(Session.get('selectedPanel') == 5){
-				return "visible";
-			}
-			else{
-				return "hidden";
-			}
 		},
 		historyVisibility:function(){
 			if(Session.get('selectedPanel') == 2){
@@ -212,14 +180,6 @@ if(Meteor.isClient){
 		}
 	});
 
-	Template.bitcoin.helpers({
-		balance:function(){
-			return Session.get('myBalance');
-		},
-		address:function(){
-			return Session.get('myAddress');
-		}
-	});
 
 	Template.currentPicks.helpers({
 		currentPicks:function(){

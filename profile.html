@@ -21,9 +21,6 @@
 							{{> highchartsHelper chartId="test" chartObject=chart width="100%"}}
 						</div>
 					</div>
-					<div id="bitcoin" class="{{bitcoinVisibility}} row">
-						{{> bitcoin}}
-					</div>
 					<div id="history" class="{{historyVisibility}} row">
 						{{> pickHistory}}
 					</div>
@@ -73,12 +70,6 @@
  			{{/each}}
  		</tbody>
  	</table>
-</template>
-
-<template name="bitcoin">
-	<h3>Bitcoin</h3>
-	Balance: {{balance}}<br/>
-	Public Address: {{address}}
 </template>
 
 <template name="pickHistory">

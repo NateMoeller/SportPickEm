@@ -4,19 +4,8 @@ Comments = new Mongo.Collection("comments");
 Teams = new Mongo.Collection("teams");
 
 if (Meteor.isServer) {
-  var BlockIo;
-  var version;
-  var block_io;
-  var future;
 
   Meteor.startup(function () {
-
-    //bitcoin code
-    BlockIo = Npm.require('block_io');
-    //future = Npm.require('fibers/future');
-    version = 2; // API version
-    block_io = new BlockIo('ef7c-29ce-0bd8-8c5c', 'VVAoT9B8', version);
-    future = Npm.require('fibers/future');
 
     Accounts.onCreateUser(function(options, user) { 
       if (options.profile){
@@ -38,9 +27,6 @@ if (Meteor.isServer) {
         else{
           //console.log("NOT A FACEBOOK USER");
         }
-
-        //create a new address
-        block_io.get_new_address({'label': user.profile.username + "x1"}, console.log);
         
       }
         
@@ -200,8 +186,11 @@ if (Meteor.isServer) {
     	if (! Meteor.userId()) {
         throw new Meteor.Error("not-authorized");
       }
+      var now = new Date();
       var ifpicked = Current_Picks.findOne({"gameId": gameId, "userId": userId});
-      if(typeof(ifpicked) == "undefined"){
+      var game = Games.findOne({"_id": gameId});
+ 
+      if(typeof(ifpicked) == "undefined" && now < game.date){
         //ok to insert
         Current_Picks.insert({
           gameId: gameId,
@@ -233,54 +222,6 @@ if (Meteor.isServer) {
         comment: comment,
         date: new Date()
       });
-    },
-
-    getBalance:function(){
-      //console.log("GET BALANCE");
-      var username = Meteor.user().profile.username;
-      // Set up a future
-      var fut = new future();
-
-      // This should work for any async method
-      setTimeout(function() {
-
-        // Return the results
-        block_io.get_balance({'label': username + 'x1'}, function(ret1, data){
-        //console.log(data.data.available_balance);
-        //console.log(data);
-        fut['return'](data);
-        });
-        
-        
-
-      }, 1 * 1000);
-
-      // Wait for async to finish before returning
-      // the result
-      return fut.wait();
-    },
-    getAddress:function(){
-      //console.log("GET ADDRESS");
-      var username = Meteor.user().profile.username;
-      var fut = new future();
-
-      // This should work for any async method
-      setTimeout(function() {
-
-        // Return the results
-        block_io.get_address_by_label({'label': username + 'x1'}, function(ret1, data){
-        //console.log(data.data.available_balance);
-        console.log(data);
-        fut['return'](data);
-        });
-        
-        
-
-      }, 1 * 1000);
-
-      // Wait for async to finish before returning
-      // the result
-      return fut.wait();
     }
 
 
