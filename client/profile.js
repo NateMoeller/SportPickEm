@@ -40,16 +40,16 @@ if(Meteor.isClient){
 		},
 		imgSize:function(){
 			//first check if facebook user (ONLY facebook users have names)
-			if(typeof(Meteor.user().profile.name) != "undefined"){
+			if(Meteor.user() && typeof(Meteor.user().profile.name) != "undefined"){
 				return "?type=normal";	
 			}
 		},
 		imgHash:function(){
-			// TODO: this is throwing an error
-			return Meteor.user().profile.hash;
+			//console.log(Meteor.user());
+			return Meteor.user() ? Meteor.user().profile.hash : '';
 		},
 		facebook:function(){
-			if(typeof(Meteor.user().profile.name) != "undefined"){
+			if(Meteor.user() && typeof(Meteor.user().profile.name) != "undefined"){
 				return true;
 			}
 			else{
@@ -59,11 +59,18 @@ if(Meteor.isClient){
 		email:function(){
 			// TODO: this is throwing an error
 			var user = Meteor.user();
-			return user.emails[0].address;
+			if(user){
+				return user.emails[0].address;
+			}
+			return '';
+			
 		},
 		username:function(){
 			var user = Meteor.user();
-			return user.profile.username;
+			if(user){
+				return user.profile.username;
+			}
+			return '';
 		},
 		chart:function(){
 			//get data
@@ -76,7 +83,7 @@ if(Meteor.isClient){
 			data.push(initDataPoint); 
 			picks.forEach(function(pick){
 				var gameInfo = Games.findOne({"_id": pick.gameId});
-				if(gameInfo.status == "Finished"){
+				if(gameInfo && gameInfo.status == "Finished"){
 					var dataPoint = [];
 					dataPoint[0] = gameInfo.date.getTime();
 					if(pick.pickedTeam == gameInfo.result){
@@ -91,7 +98,13 @@ if(Meteor.isClient){
 			});
 			data.sort(); //sort the data based on timestamp
 			//change the date of the initial data point
-			data[0][0] = Meteor.user().createdAt.getTime(); // TODO: this is throwing an error
+			var user = Meteor.user();
+			if(user){
+				data[0][0] = user.createdAt.getTime();
+			}
+			else{
+				data[0][0] = 0;
+			}
 			
 			return {
 				chart: {
@@ -161,22 +174,45 @@ if(Meteor.isClient){
 	Template.stats.helpers({
 		email:function(){
 			var user = Meteor.user();
-			return user.emails[0].address;
+			if(user){
+				return user.emails[0].address;
+			}
+			return '';
 		},
 		username:function(){
-			return Meteor.user().profile.username;
+			var user = Meteor.user();
+			if(user){
+				return user.profile.username;
+			}
+			return '';
 		},
 		streak:function(){
-			return Meteor.user().profile.streak;
+			var user = Meteor.user();
+			if(user){
+				return user.profile.streak;
+			}
+			return 0;
 		},
 		correctPicks:function(){
-			return Meteor.user().profile.correctPicks;
+			var user = Meteor.user();
+			if(user){
+				return user.profile.correctPicks;
+			}
+			return 0;
 		},
 		incorrectPicks:function(){
-			return Meteor.user().profile.incorrectPicks;
+			var user = Meteor.user();
+			if(user){
+				return user.profile.incorrectPicks;
+			}
+			return 0;
 		},
 		longestStreak:function(){
-			return Meteor.user().profile.longestStreak;
+			var user = Meteor.user();
+			if(user){
+				return user.profile.longestStreak;
+			}
+			return 0;
 		}
 	});
 
@@ -186,10 +222,9 @@ if(Meteor.isClient){
 			var myPicks = Current_Picks.find({"userId": Meteor.userId()}).fetch();
 			var allPicks = [];
 			var gameId;
-
 			myPicks.forEach(function(pick){
 				var gameInfo = Games.findOne({"_id": pick.gameId});
-				if(gameInfo.status == "Upcoming" || gameInfo.status == "In Progress"){
+				if(gameInfo && (gameInfo.status == "Upcoming" || gameInfo.status == "In Progress")){
 					var pickObj = new Object();
 					pickObj.id = pick._id;
 					pickObj.gameId = pick.gameId;
@@ -238,7 +273,7 @@ if(Meteor.isClient){
 
 			myPicks.forEach(function(pick){
 				var gameInfo = Games.findOne({"_id": pick.gameId});
-				if(gameInfo.status == "Finished"){
+				if(gameInfo && gameInfo.status == "Finished"){
 					var pickObj = new Object();
 					pickObj.gameId = pick.gameId;
 					pickObj.team1 = gameInfo.team1;
